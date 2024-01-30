@@ -1,5 +1,13 @@
 import React, { useRef } from "react";
-import { Container, Row, Col, Card, Form, Button, Alert } from "react-bootstrap";
+import {
+  Container,
+  Row,
+  Col,
+  Card,
+  Form,
+  Button,
+  Alert,
+} from "react-bootstrap";
 
 //https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=[API_KEY]
 const SignUp = () => {
@@ -26,9 +34,9 @@ const SignUp = () => {
       if (response.ok) {
         console.log("signUp OK");
         console.log(" User has successfully signed up");
-        alert("User has successfully signed up")
+        alert("User has successfully signed up");
         const data = await response;
-         console.log(data);
+        console.log(data);
       } else {
         console.log("signUp not OK");
         alert("Invalid Authentication");

@@ -1,5 +1,6 @@
 
 import React from "react";
+import Header from "./Components/Header/Header";
 import SignUp from "./Components/SignUp/SignUp";
 import SignUp from "./Components/Authentication/SignUp";
 import Login from "./Components/Authentication/Login";
@@ -9,7 +10,7 @@ import Home from "./Pages/HomePage/Home";
 function App() {
   return (
     <>
-     
+      <Header />
       <SignUp />
       <Switch>
         <Route path="/" exact>
