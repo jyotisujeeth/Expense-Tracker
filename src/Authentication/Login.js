@@ -98,6 +98,9 @@ const Login = () => {
                         </Button>
                       </div>
                     </Form>
+                    <Container className="mt-2 d-flex-center">
+                      <Link to="/resetPassword">reset Password</Link>
+                    </Container>
                     <div className="mt-3">
                       <p className="mb-0  text-center">
                         Not Have an account?

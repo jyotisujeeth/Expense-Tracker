@@ -6,6 +6,7 @@ import SignUp from "./Components/Authentication/SignUp";
 import Login from "./Components/Authentication/Login";
 import { Route, Switch } from "react-router-dom/cjs/react-router-dom.min";
 import Home from "./Pages/HomePage/Home";
+import PasswordReset from "./Components/Authentication/passwordReset";
 import UserDetails from "./Components/Authentication/UserDetails/UserDetails";
 function App() {
   return (
@@ -21,6 +22,12 @@ function App() {
         </Route>
         <Route path="/home" exact>
           <Home />
+        </Route>
+        <Route path="/resetPassword">
+          <PasswordReset />
+        </Route>
+        <Route path="/userDetails">
+          <UserDetails />
         </Route>
       </Switch>
     </>
