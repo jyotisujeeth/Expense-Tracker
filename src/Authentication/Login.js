@@ -31,6 +31,7 @@ const Login = () => {
         const data = await response.json();
         console.log(data, data.idToken);
         localStorage.setItem("token", data.idToken);
+        localStorage.setItem("email", enteredEmail);
         history.replace("/home");
       } else {
         console.log("signUp not OK");
