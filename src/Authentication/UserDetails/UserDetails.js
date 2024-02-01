@@ -112,7 +112,8 @@ const changeDetailsHandler = () => {
         </Row>
       </Container>
     </div>
-  );
+  )
+  )
 };
 
 export default UserDetails;

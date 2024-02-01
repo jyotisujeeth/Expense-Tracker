@@ -6,8 +6,10 @@ const PasswordReset = () => {
   const emailRef = useRef();
   const history = useHistory();
 
-  const resetPassHandler = async () => {
-    const enteredEmail = emailRef.current.value;
+  const resetPassHandler = async (e) => {
+    e.preventDefault();
+    const enteredEmail = emailRef.current.value;\
+      console.log(enteredEmail);
     try {
       const response = await fetch(
         "https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=AIzaSyBnUt6SmiCjCExXs2Pb4ir_uwH5us-ho2w",
@@ -66,7 +68,7 @@ const PasswordReset = () => {
                           variant="primary"
                           type="submit"
                         >
-                          Submit
+                          Send Link
                         </Button>
                       </div>
                     </Form>
