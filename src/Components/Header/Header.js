@@ -1,14 +1,16 @@
-import React from 'react'
+import React, { useContext } from "react";
 
 import { Navbar, Nav, Container, Button } from "react-bootstrap";
 import { useHistory, Link } from 'react-router-dom';
-
-const Header = () => {const history = useHistory();
+import CreateAuth from "../../Store/AuthContext/Create-Auth";
+const Header = () => {
+  const AuthCtx = useContext(CreateAuth);
+  const history = useHistory();
   const logOutHandler = () => {
     history.replace('/login')
     localStorage.removeItem('token');
     localStorage.removeItem('email');
-    // window.location.reload(false);
+     window.location.reload(false);
   }
 
   return (
@@ -26,12 +28,14 @@ const Header = () => {const history = useHistory();
             <Nav.Link href="#home">Home</Nav.Link>
             <Nav.Link href="#link">Link</Nav.Link>
             <Button
+             {AuthCtx.isLoggedIn &&  <Button
               type="button"
               variant="light"
               onClick={logOutHandler}
               size="sm"
             >
               LogOut
+              
             </Button>
           </Nav>
         </Navbar.Collapse>

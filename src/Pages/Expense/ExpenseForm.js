@@ -18,7 +18,49 @@ const ExpenseForm = () => {
     const desRef = useRef();
     const categoryRef = useRef();
 const storeDataOnDataBase = async (expense, description, category) => {
+    const putRequestOnFireBase = async (expense, description, category,Id) => {
+    let email = localStorage.getItem("email");
+    email = email.replace(/[^a-zA-Z0-9]/g, "");
+    try {
+      const response = await fetch(
+        `https://expense-data-11e4b-default-rtdb.firebaseio.com/expense-${email}/${Id}.json`,
+        {
+          method: "PUT",
+          body: JSON.stringify({
+            expense: expense,
+            description: description,
+            category: category,
+          }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      if (response.ok) {
+        console.log("put request OK");
+        ExpeseCtx.editExpense(null);
+      } else {
+        console.log("put request not OK");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+
+
+  const editExpense = (expense, description, category, editId) => {
+    document.querySelector(".expense").value = expense;
+    document.querySelector(".description").value = description;
+    document.querySelector(".category").value = category;
+    ExpeseCtx.editExpense(editId);
+  };
+
+  const storeDataOnDataBase = async (expense, description, category) => {
+    let email = localStorage.getItem("email");
+    email = email.replace(/[^a-zA-Z0-9]/g, "");
   try {
+    
     const result = await fetch(
       "https://expense-data-11e4b-default-rtdb.firebaseio.com/expense.json",
       {
