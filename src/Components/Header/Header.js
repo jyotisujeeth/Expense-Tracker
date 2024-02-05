@@ -10,7 +10,8 @@ const Header = () => {
     history.replace('/login')
     localStorage.removeItem('token');
     localStorage.removeItem('email');
-     window.location.reload(false);
+    //  window.location.reload(false);
+     AuthCtx.logInOut();
   }
 
   return (

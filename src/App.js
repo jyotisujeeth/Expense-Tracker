@@ -4,55 +4,36 @@ import Header from "./Components/Header/Header";
 //import SignUp from "./Components/SignUp/SignUp";
 import SignUp from "./Components/Authentication/SignUp";
 import Login from "./Components/Authentication/Login";
-import { Route, Switch, Redirect } from "react-router-dom/cjs/react-router-dom.min";
+import { Route, Switch, } from "react-router-dom/cjs/react-router-dom.min";
 import Home from "./Pages/HomePage/Home";
 import PasswordReset from "./Components/Authentication/passwordReset";
 import UserDetails from "./Components/Authentication/UserDetails/UserDetails";
 import CreateAuth from "./Store/AuthContext/Create-Auth";
 import PrivateRoute from "./Routes/PrivateRoute";
 import PublicRoute from "./Routes/PublicRoute";
+import Error from "./Pages/ErrorPage/Error";
 import './App.css';
 
 function App() {
   const AuthCtx = useContext(CreateAuth);
-  console.log(AuthCtx.isLoggedIn);
+  // console.log(AuthCtx.isLoggedIn);
 
-  return (
-    <>
-    <div className="App"></div>
+ 
+        return (
+    <div className="App">
       <Header />
-@@ -18,12 +22,16 @@ function App() {
-        <Route path="/login" exact>
-          <Login />
-        {/* </Route>
-        <Route path="/home" exact>
-          <Home />
-        </Route>
-        <Route path="/userdetails">
-          <UserDetails />
-        </Route>
-        {AuthCtx.isLoggedIn && (
-          <Route path="/home" exact>
-            <Home />
-          </Route>
-        )}
-        {AuthCtx.isLoggedIn && (
-          <Route path="/userdetails">
-            <UserDetails />
-          </Route>
-        )}
-        <Route path="/resetPassword">
-          <PasswordReset />
-        </Route> */}
-
-         <PrivateRoute path="/" Component={Home}/>
-        <PublicRoute path="/signup" Component={SignUp} />
-        <PublicRoute path="/login" Component={Login} />
-        <PublicRoute path="/resetPassword" Component={PasswordReset} />
-        <PrivateRoute path="/home" Component={Home} />
-        <PrivateRoute path="/userdetails" Component={UserDetails} />
-      </Switch>
-    </>
+      <Switch>
+ <PrivateRoute path="/" Component={Home} exact />
+        <PrivateRoute path="/home" Component={Home} exact />
+        <PublicRoute path="/resetPassword" Component={PasswordReset} exact />
+        <PrivateRoute path="/userdetails" Component={UserDetails} exact />
+        <PublicRoute path="/signup" Component={SignUp} exact />
+        <PublicRoute path="/login" Component={Login} exact />
+        <Route path="*">
+          <Error />
+        </Route> 
+        </Switch>
+  
     </div>
-
+_);
 }

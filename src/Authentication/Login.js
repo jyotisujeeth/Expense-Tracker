@@ -7,6 +7,15 @@ const Login = () => {
   const emailRef = useRef();
   const passwordRef = useRef();
 
+  //redux work
+  const dispatch = useDispatch();
+  const authFromRedux = useSelector(
+    (state) => state.authentication.isAuthenticated
+  );
+  const emailFromRedux = useSelector((state) => state.authentication.userEmail);
+  const tokenFromRedux = useSelector((state) => state.authentication.userToken);
+  console.log(authFromRedux, emailFromRedux,tokenFromRedux);
+
   const loginOnFireBase = async (enteredEmail, enteredPassword) => {
     try {
       const response = await fetch(
@@ -22,21 +31,26 @@ const Login = () => {
             "Content-Type": "application/json",
           },
         }
+    
       );
       if (response.ok) {
         console.log("LogIn OK");
-        console.log(" User has successfully Logged In");
-        // const data = await response;
-        // console.log(data);
+        // console.log(" User has successfully Logged In");
         const data = await response.json();
-        console.log(data, data.idToken);
+        // console.log(data, data.idToken);
+        dispatch(authAction.login());
+        dispatch(authAction.UserEmail(enteredEmail));
+        dispatch(authAction.Logintoken(data.idToken));
         localStorage.setItem("token", data.idToken);
         localStorage.setItem("email", enteredEmail);
+
         history.replace("/home");
+        AuthCtx.logInOut();
       } else {
-        console.log("signUp not OK");
+        // console.log("login not OK");
         alert("Invalid Authentication");
       }
+    
     } catch (err) {
       console.log(err);
     }
@@ -46,9 +60,21 @@ const Login = () => {
     e.preventDefault();
     const email = emailRef.current.value;
     const password = passwordRef.current.value;
-    console.log(email, password);
+    // console.log(email, password);
     loginOnFireBase(email, password);
+
+    const loginHandler = (e) => {
+        e.preventDefault();
+        const email = emailRef.current.value;
+        const password = passwordRef.current.value;
+        console.log(email, password);
+        loginOnFireBase(email, password);
+
+
+    // dispatch(authAction.Logintoken());
   };
+
+  
 
   return (
     <div>
